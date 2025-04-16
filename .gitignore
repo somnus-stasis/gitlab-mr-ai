@@ -1,0 +1,14 @@
+# Node modules
+node_modules/
+
+# Build output
+dist/
+
+# Env config
+.env
+
+# Logs
+*.log
+
+# TS build artifacts
+*.tsbuildinfo

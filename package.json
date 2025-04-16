@@ -1,0 +1,46 @@
+{
+  "name": "gitlab-mr-ai",
+  "version": "1.0.0",
+  "description": "AI-powered GitLab Merge Request summarizer CLI tool",
+  "main": "dist/main.js",
+  "bin": {
+    "mr-ai": "dist/cli/index.js"
+  },
+  "scripts": {
+    "start": "ts-node src/cli/index.ts",
+    "dev": "ts-node-dev src/cli/index.ts",
+    "build": "tsc",
+    "prepare": "npm run build",
+    "test": "echo Error: no test specified && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/somnus-stasis/gitlab-mr-ai.git"
+  },
+  "keywords": [
+    "gitlab",
+    "merge-request",
+    "ai",
+    "gemini",
+    "cli"
+  ],
+  "author": "SomnusStasis",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/somnus-stasis/gitlab-mr-ai/issues"
+  },
+  "homepage": "https://github.com/somnus-stasis/gitlab-mr-ai#readme",
+  "dependencies": {
+    "@google/generative-ai": "^0.24.0",
+    "commander": "^13.1.0",
+    "dotenv": "^16.5.0",
+    "mustache": "^4.2.0",
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "@types/mustache": "^4.2.5",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.8.3"
+  }
+}
