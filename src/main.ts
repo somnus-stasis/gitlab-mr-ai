@@ -1,3 +1,4 @@
+import fs from "fs/promises";
 import {
   getMergeRequestChanges,
   updateMergeRequestDescription,
@@ -10,6 +11,7 @@ import { detectTemplate } from "./core/ticket/detectTemplate";
 export async function generateMrSummary(options: {
   mrId: string;
   template?: string;
+  prompt?: string;
   output: "console" | "file" | "post";
 }) {
   const { mrId, output } = options;
@@ -17,11 +19,16 @@ export async function generateMrSummary(options: {
   let ticket = `#${mrId}`;
 
   const { changes, sourceBranch } = await getMergeRequestChanges(mrId);
-  const { description, keyChanges } = await summarizeFromDiff(changes);
+  const promptInput = options.prompt || "summary-base.txt";
+  const { description, keyChanges } = await summarizeFromDiff(
+    changes,
+    promptInput
+  );
 
   if (!template) {
     const parsed = parseBranch(sourceBranch);
-    template = detectTemplate(parsed.type);
+    const isRecognized = parsed.ticket !== null;
+    template = isRecognized ? detectTemplate(parsed.type) : "general";
     if (parsed.ticket) {
       ticket = parsed.ticket.startsWith("PL-")
         ? parsed.ticket
@@ -29,14 +36,15 @@ export async function generateMrSummary(options: {
     }
   }
 
-  const rendered = await renderTemplate(template, {
+  const context = {
     ticket,
     notes: `${description}\n\n**Key Changes:**\n${keyChanges}`,
     evidence: "<!-- Please attach logs or screenshots -->",
-  });
+  };
+
+  const rendered = await renderTemplate(template, context);
 
   if (output === "file") {
-    const fs = await import("fs/promises");
     await fs.writeFile(`mr-summary-${mrId}.md`, rendered);
     console.log(`📄 Summary written to mr-summary-${mrId}.md`);
   } else if (output === "post") {

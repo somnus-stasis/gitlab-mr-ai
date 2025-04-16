@@ -12,7 +12,7 @@ export async function getMergeRequestChanges(
   mrId: string
 ): Promise<{ changes: any[]; sourceBranch: string }> {
   const url = `${Env.GITLAB_API_URL}/projects/${encodeURIComponent(
-    Env.GITLAB_PROJECT_ID
+    Env.GITLAB_PROJECT_ID!
   )}/merge_requests/${mrId}/changes`;
   const response = await fetch(url, { headers });
 

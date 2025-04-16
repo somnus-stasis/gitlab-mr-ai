@@ -4,9 +4,13 @@ import { generateSummaryFromChanges } from "../../infrastructure/gemini.client";
 
 export async function summarizeFromDiff(
   diffJson: any[],
-  promptName = "summary-base.txt"
+  promptInput: string = "summary-base.txt"
 ) {
-  const promptPath = path.resolve("src/prompts", promptName);
+  const isCustomPath = promptInput.includes("/") || promptInput.includes("\\");
+  const promptPath = isCustomPath
+    ? path.resolve(promptInput)
+    : path.resolve("src/prompts", promptInput); // << fallback default
+
   const summary = await generateSummaryFromChanges(promptPath, diffJson);
 
   return {
