@@ -1,6 +1,6 @@
 {
   "name": "gitlab-mr-ai",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "AI-powered GitLab Merge Request summarizer CLI tool",
   "main": "dist/main.js",
   "bin": {
@@ -11,7 +11,8 @@
     "dev": "ts-node-dev src/cli/index.ts",
     "build": "rm -rf dist/ && tsc && cp -r src/prompts dist/prompts",
     "prepare": "npm run build",
-    "test": "jest"
+    "test": "jest",
+    "release": "standard-version"
   },
   "repository": {
     "type": "git",
