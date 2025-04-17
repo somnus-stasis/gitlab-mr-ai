@@ -12,3 +12,5 @@ dist/
 
 # TS build artifacts
 *.tsbuildinfo
+
+coverage/
