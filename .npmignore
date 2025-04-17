@@ -1,0 +1,11 @@
+src/
+__tests__/
+coverage/
+canvas/
+.env
+*.ts
+*.log
+README-draft.md
+.vscode/
+.gitignore
+.gitlab-ci.yml

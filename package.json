@@ -24,7 +24,7 @@
     "gemini",
     "cli"
   ],
-  "author": "SomnusStasis",
+  "author": "SomnusStasis <somnus.stasis@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/somnus-stasis/gitlab-mr-ai/issues"
