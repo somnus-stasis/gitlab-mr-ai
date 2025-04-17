@@ -9,7 +9,7 @@ export async function summarizeFromDiff(
   const isCustomPath = promptInput.includes("/") || promptInput.includes("\\");
   const promptPath = isCustomPath
     ? path.resolve(promptInput)
-    : path.resolve("src/prompts", promptInput); // << fallback default
+    : path.resolve(__dirname, "../../prompts", promptInput);
 
   const summary = await generateSummaryFromChanges(promptPath, diffJson);
 

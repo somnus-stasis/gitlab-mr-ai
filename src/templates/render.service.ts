@@ -1,7 +1,6 @@
 import fs from "fs/promises";
 import path from "path";
 import Mustache from "mustache";
-import { Env } from "../config/env";
 
 export async function renderTemplate(
   templateInput: string,
@@ -13,7 +12,7 @@ export async function renderTemplate(
     templateInput.includes("\\");
   const templatePath = isPath
     ? path.resolve(templateInput)
-    : path.resolve(Env.TEMPLATE_DIR, `${templateInput}.md`);
+    : path.resolve(__dirname, "../../templates", `${templateInput}.md`);
 
   const template = await fs.readFile(templatePath, "utf-8");
   return Mustache.render(template, context);

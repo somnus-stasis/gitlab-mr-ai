@@ -178,7 +178,6 @@ Set via `.env` or CI variables:
 | `GITLAB_PROJECT_ID` | ✅ | GitLab project numeric ID |
 | `GITLAB_API_URL` | ❌ | GitLab API URL (default: `https://gitlab.com/api/v4`) |
 | `GEMINI_MODEL` | ❌ | Gemini model ID (default: `gemini-1.5-flash`) |
-| `TEMPLATE_DIR` | ❌ | Default template folder (default: `templates`) |
 
 ---
 

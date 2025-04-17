@@ -9,7 +9,7 @@
   "scripts": {
     "start": "ts-node src/cli/index.ts",
     "dev": "ts-node-dev src/cli/index.ts",
-    "build": "tsc",
+    "build": "rm -rf dist/ && tsc && cp -r src/prompts dist/prompts",
     "prepare": "npm run build",
     "test": "jest"
   },
@@ -23,6 +23,12 @@
     "ai",
     "gemini",
     "cli"
+  ],
+  "files": [
+    "dist",
+    "templates",
+    "README.md",
+    "LICENSE"
   ],
   "author": "SomnusStasis <somnus.stasis@gmail.com>",
   "license": "MIT",
