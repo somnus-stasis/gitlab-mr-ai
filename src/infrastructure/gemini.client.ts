@@ -1,10 +1,9 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleGenAI } from "@google/genai";
 import { Env } from "../config/env";
 import fs from "fs/promises";
 import path from "path";
 
-const genAI = new GoogleGenerativeAI(Env.GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: Env.GEMINI_MODEL });
+const ai = new GoogleGenAI({ apiKey: Env.GEMINI_API_KEY });
 
 export async function generateSummaryFromChanges(
   promptPath: string,
@@ -17,20 +16,28 @@ export async function generateSummaryFromChanges(
     2
   )}`;
 
-  const result = await model.generateContent(finalPrompt);
-  const response = await result.response;
+  const response = await ai.models.generateContent({
+    model: Env.GEMINI_MODEL,
+    contents: finalPrompt,
+  });
 
-  let text = response.text().trim();
+  const text = response.text?.trim();
+
+  if (!text) {
+    throw new Error("No response text from Gemini API.");
+  }
+
+  let cleaned = text;
 
   // Strip ```json ... ``` if present
-  if (text.startsWith("```json")) {
-    text = text
+  if (cleaned.startsWith("```json")) {
+    cleaned = cleaned
       .replace(/^```json/, "")
       .replace(/```$/, "")
       .trim();
   }
 
-  const parsed = JSON.parse(text);
+  const parsed = JSON.parse(cleaned);
 
   return {
     title: parsed.title,

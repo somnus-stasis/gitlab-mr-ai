@@ -5,18 +5,16 @@ jest.mock("fs/promises", () => ({
   readFile: jest.fn(() => Promise.resolve("PROMPT_TEMPLATE")),
 }));
 
-// Mock SDK structure dari @google/generative-ai
-jest.mock("@google/generative-ai", () => ({
-  GoogleGenerativeAI: jest.fn().mockImplementation(() => ({
-    getGenerativeModel: jest.fn().mockReturnValue({
+// Mock SDK structure dari @google/genai
+jest.mock("@google/genai", () => ({
+  GoogleGenAI: jest.fn().mockImplementation(() => ({
+    models: {
       generateContent: jest.fn().mockImplementation(() =>
         Promise.resolve({
-          response: {
-            text: () => "```markdown\nFallback raw markdown response\n```",
-          },
+          text: "```markdown\nFallback raw markdown response\n```",
         })
       ),
-    }),
+    },
   })),
 }));
 
@@ -32,23 +30,22 @@ describe("generateSummaryFromChanges", () => {
 
   it("should parse valid JSON if AI response is valid", async () => {
     // Override mock untuk test ini saja
-    const { GoogleGenerativeAI } = jest.requireMock("@google/generative-ai");
-    GoogleGenerativeAI.mockImplementation(() => ({
-      getGenerativeModel: () => ({
+    const { GoogleGenAI } = jest.requireMock("@google/genai");
+    GoogleGenAI.mockImplementation(() => ({
+      models: {
         generateContent: () =>
           Promise.resolve({
-            response: {
-              text: () =>
-                JSON.stringify({
-                  description: "Real summary",
-                  keyChanges: ["- file1.ts: updated function"],
-                }),
-            },
+            text: JSON.stringify({
+              title: "Judul",
+              description: "Real summary",
+              keyChanges: ["- file1.ts: updated function"],
+            }),
           }),
-      }),
+      },
     }));
 
     const result = await generateSummaryFromChanges("dummy-prompt.txt", []);
+    expect(result.title).toBe("Judul");
     expect(result.description).toBe("Real summary");
     expect(result.keyChanges).toContain("- file1.ts: updated function");
   });
