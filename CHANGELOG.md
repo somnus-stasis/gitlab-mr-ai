@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/somnus-stasis/gitlab-mr-ai/compare/v1.0.1...v1.1.0) (2025-07-03)
+
+
+### Features
+
+* integrate @google/genai for enhanced AI capabilities and update dependencies in package.json and package-lock.json, refs [#0](https://github.com/somnus-stasis/gitlab-mr-ai/issues/0) ([56102e4](https://github.com/somnus-stasis/gitlab-mr-ai/commit/56102e43e13b8f83f6a2726d236699dd51c62b70))
+
 ### [1.0.1](https://github.com/somnus-stasis/gitlab-mr-ai/compare/v1.0.0...v1.0.1) (2025-04-17)
 
 
