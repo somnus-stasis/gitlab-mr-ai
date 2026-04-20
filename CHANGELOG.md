@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/somnus-stasis/gitlab-mr-ai/compare/v1.1.0...v1.2.0) (2026-04-20)
+
+
+### Features
+
+* add .env.example file with required and optional environment variables for configuration ([8b159eb](https://github.com/somnus-stasis/gitlab-mr-ai/commit/8b159eb4472b9b04291c775476512c7f920c1d8e))
+* enhance GitLab MR summary generation with improved ticket formatting, new environment variables, and comprehensive test coverage ([23a693a](https://github.com/somnus-stasis/gitlab-mr-ai/commit/23a693a10357e05f409198a689745ae2478fd0a5))
+
 ## [1.1.0](https://github.com/somnus-stasis/gitlab-mr-ai/compare/v1.0.1...v1.1.0) (2025-07-03)
 
 
