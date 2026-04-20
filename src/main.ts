@@ -7,6 +7,7 @@ import { renderTemplate } from "./templates/render.service";
 import { summarizeFromDiff } from "./core/summarize/summarizeFromDiff";
 import { parseBranch } from "./core/ticket/parseBranch";
 import { detectTemplate } from "./core/ticket/detectTemplate";
+import { formatTicket } from "./core/ticket/formatTicket";
 
 export async function generateMrSummary(options: {
   mrId: string;
@@ -30,9 +31,7 @@ export async function generateMrSummary(options: {
     const isRecognized = parsed.ticket !== null;
     template = isRecognized ? detectTemplate(parsed.type) : "general";
     if (parsed.ticket) {
-      ticket = parsed.ticket.startsWith("PL-")
-        ? parsed.ticket
-        : `#${parsed.ticket}`;
+      ticket = formatTicket(parsed.ticket);
     }
   }
 
